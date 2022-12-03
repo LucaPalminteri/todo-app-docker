@@ -14,6 +14,10 @@ app.post('/items', addItem);
 app.put('/items/:id', updateItem);
 app.delete('/items/:id', deleteItem);
 
+app.use(function (req,res,next){
+	res.status(404).send('Unable to find the requested resource!');
+});
+
 db.init().then(() => {
     app.listen(3000, () => console.log('Listening on port 3000'));
 }).catch((err) => {
